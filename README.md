@@ -2,7 +2,7 @@
 
 ## Features
 - Exports the student's name, ccid, email, lab enrollment, and lecture enrollment to a CSV file.
-- Excludes instructors and teaching assistants from the output
+- Excludes instructors and teaching assistants from the output.
 - The last row shows the total number of students on the list.
 
 ## How to use
