@@ -11,7 +11,7 @@ const rows = document.querySelectorAll('tr[id^="user-index-participants-"][class
 
 rows.forEach(row => {
     // Excludes TAs and Instructors
-    if (row.childNodes[4].innerText === "Student") {
+    if (row.childNodes[4].innerText.trim() === "Student") {
 
         // student name
         student = row.childNodes[1].innerText;
@@ -31,11 +31,18 @@ rows.forEach(row => {
         // excludes the day and time
         lab_enrolled = lab.getAttribute("data-timeenrolled").split(",")[1];
 
-        // second child is lecture
-        lecture = enrolled.childNodes[1];
+		try {
+			// second child is lecture
+			lecture = enrolled.childNodes[1];
 
-        // excludes the day and time
-        lecture_enrolled = lecture.getAttribute("data-timeenrolled").split(",")[1];
+			// excludes the day and time
+			lecture_enrolled = lecture.getAttribute("data-timeenrolled").split(",")[1];
+		} 
+		catch (err) {
+            // for single-section classes
+			lecture = lab;
+			lecture_enrolled = lab_enrolled;
+		}
 
         // append to csv_rows
         csv_rows.push([student, ccid, email, lab_enrolled, lecture_enrolled]);
